@@ -8,8 +8,11 @@ from dataclasses import dataclass, field
 
 # --- 설정 ---
 FTP_HOST = "ftp.3gpp.org"
-BASE_PATH = "/tsg_ran/WG1_RL1/"
-AH_BASE_FOLDER = "TSGR1_AH" # 실제 Ad-Hoc 회의 상위 폴더 이름 (확인됨)
+BASE_PATH = "/tsg_ran/WG1_RL1/" ## For RAN1
+# BASE_PATH = "/tsg_ran/WG1_RL2/" ## For RAN2
+AH_BASE_FOLDER = "TSGR1_AH" # 실제 Ad-Hoc 회의 상위 폴더 이름 ## For RAN1 (확인됨)
+# AH_BASE_FOLDER = "TSGR2_AHs" # 실제 Ad-Hoc 회의 상위 폴더 이름 ## For RAN2 (확인됨)
+
 DOC_SUBDIR = "Docs"
 DOWNLOAD_DIR = "3gpp_downloads" # 다운로드 받을 로컬 폴더 이름
 
@@ -61,7 +64,7 @@ def parse_meeting_folder_name(folder_name):
         "TSGR1_100-e" -> (100, 3)
         그 외 -> (-1, 0)
     """
-    match = re.match(r"TSGR1_(\d+)(.*)", folder_name)
+    match = re.match(r"TSGR[12]_(\d+)(.*)", folder_name)
     if match:
         main_num = int(match.group(1))
         suffix = match.group(2).lower()

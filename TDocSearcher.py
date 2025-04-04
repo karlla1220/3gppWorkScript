@@ -35,8 +35,10 @@ target_doc_prefixes = [
 #   이 범위에 해당하는 정규 회의들과 Ad-Hoc 회의 중 필터링 조건에 맞는 회의가 검색 대상이 됩니다.
 start_meeting_range_folder = "TSGR1_107" # 예시: RAN1#109-e 회의부터
 end_meeting_range_folder = "TSGR1_123"     # 예시: RAN1#118 회의까지
+zipAfterDownload=True
 addAdhoc=True
 adhocFilterText = "NR"
+
 
 # --- 데이터 구조 정의 ---
 @dataclass
@@ -327,7 +329,8 @@ if __name__ == "__main__":
             downloaded_files = download_docs(ftp, all_meetings, target_doc_prefixes, start_meeting_range_folder, end_meeting_range_folder)
 
             # 3. 다운로드된 문서 압축
-            zip_downloaded_docs(downloaded_files)
+            if zipAfterDownload:
+                zip_downloaded_docs(downloaded_files)
 
     except ftplib.all_errors as e:
         print(f"\nFTP 오류 발생: {e}")
